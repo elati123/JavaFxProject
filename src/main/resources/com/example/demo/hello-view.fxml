@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="len" />
+          <TableColumn prefWidth="102.0" text="lat" />
+            <TableColumn prefWidth="107.0" text="aAltitude" />
+            <TableColumn prefWidth="217.0" text="is Threat" />
+        </columns>
+      </TableView>
+      <AmbientLight color="CHARTREUSE" layoutX="110.0" layoutY="34.0" lightOn="true" />
+   </children>
+</AnchorPane>
