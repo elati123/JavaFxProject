@@ -1,0 +1,297 @@
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 9e64eb63fd1570ef9d8a5f74d1aba1ab55df53a8)
++++ b/.idea/compiler.xml	(date 1630608224069)
+@@ -6,11 +6,11 @@
+         <sourceOutputDir name="target/generated-sources/annotations" />
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+         <outputRelativeToContentRoot value="true" />
+-        <module name="demo" />
++        <module name="JavaFxProject" />
+       </profile>
+     </annotationProcessing>
+     <bytecodeTargetLevel>
+-      <module name="demo" target="16" />
++      <module name="JavaFxProject" target="16" />
+     </bytecodeTargetLevel>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision 9e64eb63fd1570ef9d8a5f74d1aba1ab55df53a8)
++++ b/.idea/modules.xml	(date 1630608224076)
+@@ -2,7 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/demo.iml" filepath="$PROJECT_DIR$/demo.iml" />
++      <module fileurl="file://$PROJECT_DIR$/JavaFxProject.iml" filepath="$PROJECT_DIR$/JavaFxProject.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/main/java/com/example/demo/HelloController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/demo/HelloController.java b/src/main/java/com/example/demo/HelloController.java
+--- a/src/main/java/com/example/demo/HelloController.java	(revision 9e64eb63fd1570ef9d8a5f74d1aba1ab55df53a8)
++++ b/src/main/java/com/example/demo/HelloController.java	(date 1630608224086)
+@@ -1,14 +1,56 @@
+ package com.example.demo;
+ 
++import javafx.collections.FXCollections;
++import javafx.collections.ObservableList;
+ import javafx.fxml.FXML;
+-import javafx.scene.control.Label;
++import javafx.fxml.Initializable;
++import javafx.scene.control.Button;
++import javafx.scene.control.TableColumn;
++import javafx.scene.control.TableView;
++import javafx.scene.control.cell.PropertyValueFactory;
++
++import java.net.URL;
++import java.util.ResourceBundle;
+ 
+-public class HelloController {
++public class HelloController implements Initializable {
++
++    @FXML
++    public TableView<track> table;
++
++    @FXML
++    public TableColumn<track, Integer> lat;
++
++    @FXML
++    public TableColumn<track,Integer> lon;
++
+     @FXML
+-    private Label welcomeText;
++    public TableColumn<track, Integer> alt;
+ 
+     @FXML
+-    protected void onHelloButtonClick() {
+-        welcomeText.setText("Welcome to JavaFX Application!");
++    public TableColumn<track, String> status;
++
++    @FXML
++    public Button exit;
++
++    ObservableList<track> list = FXCollections.observableArrayList(
++            new track(21,1,12,"e")
++
++    );
++
++
++
++    @Override
++    public void initialize(URL url, ResourceBundle resourceBundle) {
++        lat.setCellValueFactory(new PropertyValueFactory<track,Integer>("lat"));
++        lon.setCellValueFactory(new PropertyValueFactory<track,Integer>("lon"));
++        alt.setCellValueFactory(new PropertyValueFactory<track,Integer>("alt"));
++        status.setCellValueFactory(new PropertyValueFactory<track,String>("status"));
++
++        table.setItems(list);
++        table.getItems().add(new track(32,32,32,"abc"));
++
++
+     }
+-}
+\ No newline at end of file
++
++
++}
+Index: src/main/resources/com/example/demo/hello-view.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/com/example/demo/hello-view.fxml b/src/main/resources/com/example/demo/hello-view.fxml
+--- a/src/main/resources/com/example/demo/hello-view.fxml	(revision 9e64eb63fd1570ef9d8a5f74d1aba1ab55df53a8)
++++ b/src/main/resources/com/example/demo/hello-view.fxml	(date 1630608224100)
+@@ -1,20 +1,20 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+-<?import javafx.scene.AmbientLight?>
++<?import javafx.scene.control.Button?>
+ <?import javafx.scene.control.TableColumn?>
+ <?import javafx.scene.control.TableView?>
+ <?import javafx.scene.layout.AnchorPane?>
+ 
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+    <children>
+-      <TableView layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
++      <TableView fx:id="table" layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
+         <columns>
+-          <TableColumn prefWidth="75.0" text="len" />
+-          <TableColumn prefWidth="102.0" text="lat" />
+-            <TableColumn prefWidth="107.0" text="aAltitude" />
+-            <TableColumn prefWidth="217.0" text="is Threat" />
++          <TableColumn fx:id="lat" prefWidth="75.0" text="Latitude" />
++          <TableColumn fx:id="lon" prefWidth="133.0" text="Longitude" />
++            <TableColumn fx:id="alt" prefWidth="112.0" text="Altitude" />
++            <TableColumn fx:id="status" prefWidth="181.0" text="status" />
+         </columns>
+       </TableView>
+-      <AmbientLight color="CHARTREUSE" layoutX="110.0" layoutY="34.0" lightOn="true" />
++      <Button fx:id="exit" layoutX="837.0" layoutY="520.0" mnemonicParsing="false" text="Exit" textAlignment="CENTER" />
+    </children>
+ </AnchorPane>
+Index: src/main/java/com/example/demo/track.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/example/demo/track.java b/src/main/java/com/example/demo/track.java
+new file mode 100644
+--- /dev/null	(date 1630608224093)
++++ b/src/main/java/com/example/demo/track.java	(date 1630608224093)
+@@ -0,0 +1,32 @@
++package com.example.demo;
++
++public class track {
++    // data typelar sonradan değişecek şimdilik int
++    private int lon;  // longitude
++    private int lat;   // latitdde
++    private int alt;   // altitude
++    private String status;
++
++    public track(int lon, int lat, int alt, String status) {
++        this.lon = lon;
++        this.lat = lat;
++        this.alt = alt;
++        this.status = status;
++    }
++
++    public int getLon() {
++        return lon;
++    }
++
++    public int getLat() {
++        return lat;
++    }
++
++    public int getAlt() {
++        return alt;
++    }
++
++    public String getStatus() {
++        return status;
++    }
++}
+\ No newline at end of file
+Index: target/classes/com/example/demo/hello-view.fxml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/target/classes/com/example/demo/hello-view.fxml b/target/classes/com/example/demo/hello-view.fxml
+new file mode 100644
+--- /dev/null	(date 1630608224100)
++++ b/target/classes/com/example/demo/hello-view.fxml	(date 1630608224100)
+@@ -0,0 +1,20 @@
++<?xml version="1.0" encoding="UTF-8"?>
++
++<?import javafx.scene.control.Button?>
++<?import javafx.scene.control.TableColumn?>
++<?import javafx.scene.control.TableView?>
++<?import javafx.scene.layout.AnchorPane?>
++
++<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
++   <children>
++      <TableView fx:id="table" layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
++        <columns>
++          <TableColumn fx:id="lat" prefWidth="75.0" text="Latitude" />
++          <TableColumn fx:id="lon" prefWidth="133.0" text="Longitude" />
++            <TableColumn fx:id="alt" prefWidth="112.0" text="Altitude" />
++            <TableColumn fx:id="status" prefWidth="181.0" text="status" />
++        </columns>
++      </TableView>
++      <Button fx:id="exit" layoutX="837.0" layoutY="520.0" mnemonicParsing="false" text="Exit" textAlignment="CENTER" />
++   </children>
++</AnchorPane>
+diff --git a/demo.iml b/JavaFxProject.iml
+rename from demo.iml
+rename to JavaFxProject.iml
+diff --git a/target/classes/com/example/demo/track.class b/target/classes/com/example/demo/track.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..90ba889553846bc3a35a7dda1ef65374b503add3
+GIT binary patch
+literal 818
+zc${reO;6iE5Ph524sje35=isGH&jY|s4u;Nkg7^ZmLfO=<-Rei;NaNEY^omngE)ZH
+zs8SF80sT=Gvl|Pf)Q6pUvpa9z+xh$N_a6Y~_-LbmVhM%=6Ba{##=mhd;_=kGp3Fob
+z8Laa#4&?<yu|F7>v4L_4wu1^BhE|ZwJ@K8-A0px1ih1J6ln3|J8znIV^Hu+*gPLkC
+zMqH|T%RxieJks^HgB`R;=uvXHcw}e{-(8Gk8phKzhIZfg{r?{ZV+P}Eaw`~W!!Q<C
+zi}^&PH+&KaH7E&qH0Eij>g>{xcOi+ihxy(~%9;u}RQ~D5epYh10$(BmWdftj>~?>U
+zXV)Gji!>0Ip^~)q<WH&%NA%+Y?cShBJ0w(4>(RN9Wm*Si6O7IWifyWX(7j2y>;3|B
+zdrOqu-6g8--V$}UV=U2p(cF&efkn|KjS9*%a}!lGDRxMyOD~^SlhDI1ppkOIG*Vs)
+z8YwqLjg%jQ-uJMdx$!8ge$)Ml($kx;r7s&=WHr#tL>LZo$<=joE0=tjORlezySd~e
+S9Osam&uirUT=I$TI(-FyN_89n
+
+diff --git a/target/classes/module-info.class b/target/classes/module-info.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..741387715ef7668dfdf1520fafbf889ee2245a14
+GIT binary patch
+literal 277
+zc$`g*I}XAy5JYDKg#XuE1M?|TQPWXz0uvkvvN1{krQ}=`9DqY191}#gnAN@+?Y!QP
+zCx9hb9Uh^r&F-q?BtAuk(At=563SJqBw<jp_)**h!CyPXP`7qyG?$ssXC?VgYQxYZ
+zH1i<eiqt;v=K-Jb1w)6>&v}&b(3~!bQ7J>umKQL}v|<?iQ~N}m4{?}|G5Quwi=t^>
+jbO#8(@lbJEMa}L2zN1w%Y^sH}ySh&MP6@-(rmyz_7h^d0
+
+diff --git a/target/classes/com/example/demo/HelloApplication.class b/target/classes/com/example/demo/HelloApplication.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..405b4f0033ca8d4e640dc385e1935f2b317e6780
+GIT binary patch
+literal 1404
+zc$|e)Yg5xu5IvU`(w1nUlmdz%AlgzOsDKX;L>__$iY;_x{1n2a4U;CFHaz?x{t*38
+z92p%y`=cE9CK+3>jP1<co4b4WoU^;huixK(0GP*a1T6?i2+C+h8^gencA_1gDO$N~
+z8oK5fwxul9_Y7_GhGjSl41r`SA4Uja2@x6XkQsXX%T-4!a3v>f&iQC^hW6d9mDS};
+zc4=pIg`rQqCU7o-n}|y2kkN@4L+sx;hOi*u=j~5kn<|x;5NAmE{=>79sjR)<R8?C$
+z;1vl8h9TW9Df~<;l})Z3@RF^pbJMgN^oG#O5G{(+i4%jLPKq=U+`?@M{W9)gfZPH>
+zF*U28ESp-jN@@$-$?~dwT+xZ+u*cDh$T=0mD$J$4Ba1uAZdN7PUAQYcFvQTAyzCP?
+zMjA??bBlBeD{hU-xQ_=6L6c-L#FME8u+07u*PS^DDTb~~_qVkQx10!ukruGy488SA
+zHbfA52$R%xw=hGZJyS9s;t@lr%AFm<5nbqRrZ6vpr)A7w)(dty(~w*Na*zG+r!t<2
+zDGXMN_Njz9hK{R=Bk0Bp84Fk>R;G4r=|yUC@<THQlxW#LAk3(0SbXcaw9hL$+P<J1
+zQ*B){^IF9a&;DW1DH_zi5%s@wLCjid;wsK1J@pZE!CR}|z{Z;eFhs;GdDBScSDVkN
+z3*;3p-mGqvX7x<xWkIScA>%h%F>GZc^VdVtN}3@Stx_O`T}{eGnR4#Lt{HAmuS%X2
+zH!wuyZ-Mv)z{Dqm>`Qu5Xl1mvj-7*jrcDc$$hNtM?RZ62_5!es6<Qfqu|`qi@+So8
+z56q;$K&s)!1-kZP-Lak;`pz-9d4b`*@fz;^MDiSCTj|(D4N98K<8%#A>R<zq$lfFy
+zMFJfdrH@D&F-*~WGL5)PV$1{bNr>HRtP`082C;!RlxdW1zJ*HqHpw3(-xk8y#-guu
+i)>j$|e8=;zn6KkU+{*M2es6=|5Z)o{3eLHaJAVKnj82IF
+
+diff --git a/target/classes/com/example/demo/HelloController.class b/target/classes/com/example/demo/HelloController.class
+new file mode 100644
+index 0000000000000000000000000000000000000000..82d30563e0e29638e4ba0af67baf60c50f497a1c
+GIT binary patch
+literal 2121
+zc$}?OZC4XV6n+K*8{$^e2v)7qAk_v$7A>~cMXIDtO<jp47(x5C*^FWBX4kVjYoY(D
+z=d@t!sXw4U%Hy3$2r&%_A9`}KJNM3gdG2%P&i?!6@7Dm9P)lJ5!x|DgMli~derCV0
+z4bS%LMydLYJAz?!$@N{a%rKmrsc1+toN|JO!ME+kbB`M}-Utj4+RiUYq!<`aL4z*C
+zy~l7mS1cB-gP3Izx_;f9sibfMX$|k|$lxSHR+>EBHk`ooD5)Fxkx|&lA4m)*gKEUX
+z7k1U-cf!!#vD}Ej-N-$$x*?l0R*!I{w!8E+$1s6Y8a~i*8fOT=e@eQ`Juk=yz6fQI
+zkRjozjMGO9{-KU@I8Us3HhEpx_lg|ubMjSjjdkflWyTHP)bJ6*d`~lnuow@*;5iS)
+zPQ~_OUa%bzggZ%`OJNchB;C^t6S>}8U&JL1pXkV8=78%%kr3Ar7kSFrnTp{|Zoi0F
+zxSo->J+De_rwp>*%R1(o^#*<tb5dpKSWqh46G<#c)u%cZrD`-1wuqx77Nz!c9XId=
+z!-$Y52x1?$DlY%kOu@vGhFdz8@g>7#e{+T;6;u?wLFedF?g$N(q?x#*V+DEguD87}
+z=8kf>lK5IyU3HG(8{E}U)bTCuF-#3~m2S0KS10$6^<xe9sST|lPq!PMQKZpyZO{F!
+zN!(c3t@}i5Nb8#eNL;ddkFmLIQj)dU7jA<LBUetG?+4Vd<|JmUP6UOG`xZHr1|IN3
+z^L12O^aZc;P(fJzUm~`qKn6_kZI=i>-#hL~EJWaw*{#71?n_-FAJmBc6PD}q)wogR
+z;d-+<87pvXnyJv0a!Z*ITW%!phd~z*MNYZ<-6qG&trOyNVLV*3S~aW5T;ov?hYnwf
+z{hG(=Fw?1uLyzJ3yDp>%-!Wx4dw3YiUsiI#m6qdO_|(mXDVpXXFj({vU~;HQTBR?|
+z5K4GJ?@`izM{g!C$M)V@*WO&8y@ft|iyeFAuDx|Uq-UoN^6IB`)4rl`kEq>8q$wdq
+zD`0AN4{SE^546qUSM*3vB+`0jY!AoEFLC@&jQ_6OH|Qz9rJxU60@K)}mEH`1$9SS3
+ze2*Vm!Cw<S!}Q*o{R3xTVRAE*-NV!_J|=lq$yeI)yppfB<!eg5-j+Y3|M)I$%H=L@
+zD~wtB%X~#3|3YC1j}9<SQf3grX<R`T^F*hC+qjB*xQ05eE8N*8wia%=`Vl{=TDI^r
+LY(-R6MReW*Bnd6V
+
