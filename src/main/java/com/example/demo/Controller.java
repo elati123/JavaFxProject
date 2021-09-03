@@ -74,11 +74,6 @@ public class Controller implements Initializable {
         );
 
         addData();
-
-
-
-
-
     }
     public void addData() {
 
@@ -86,7 +81,7 @@ public class Controller implements Initializable {
             @Override
             public void run() {
                 double progress = 0;
-                for(int i = 0;i<10;i++){
+               while (true){
 
                     try{
                         Thread.sleep(1000);

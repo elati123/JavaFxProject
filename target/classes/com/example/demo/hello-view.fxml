@@ -5,16 +5,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="1027.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
    <children>
-      <TableView fx:id="table" layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
+      <TableView fx:id="table" layoutX="145.0" layoutY="124.0" prefHeight="479.0" prefWidth="737.0">
         <columns>
           <TableColumn fx:id="lat" prefWidth="75.0" text="Latitude" />
-          <TableColumn fx:id="lon" prefWidth="133.0" text="Longitude" />
-            <TableColumn fx:id="alt" prefWidth="112.0" text="Altitude" />
-            <TableColumn fx:id="status" prefWidth="181.0" text="status" />
+          <TableColumn fx:id="lon" prefWidth="209.0" text="Longitude" />
+            <TableColumn fx:id="alt" prefWidth="157.0" text="Altitude" />
+            <TableColumn fx:id="status" prefWidth="277.0" text="status" />
         </columns>
       </TableView>
-      <Button fx:id="exit" layoutX="837.0" layoutY="520.0" mnemonicParsing="false" onAction="#close" text="Exit" textAlignment="CENTER" />
+      <Button fx:id="exit" layoutX="46.0" layoutY="645.0" mnemonicParsing="false" onAction="#close" text="Exit" textAlignment="CENTER" />
    </children>
 </AnchorPane>
