@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="581.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
    <children>
       <TableView fx:id="table" layoutX="220.0" layoutY="125.0" prefHeight="331.0" prefWidth="502.0">
         <columns>
@@ -15,6 +15,6 @@
             <TableColumn fx:id="status" prefWidth="181.0" text="status" />
         </columns>
       </TableView>
-      <Button fx:id="exit" layoutX="837.0" layoutY="520.0" mnemonicParsing="false" text="Exit" textAlignment="CENTER" />
+      <Button fx:id="exit" layoutX="837.0" layoutY="520.0" mnemonicParsing="false" onAction="#close" text="Exit" textAlignment="CENTER" />
    </children>
 </AnchorPane>

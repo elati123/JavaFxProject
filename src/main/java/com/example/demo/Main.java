@@ -1,16 +1,19 @@
 package com.example.demo;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+
         stage.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -19,7 +22,8 @@ public class Main extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+        public static void main (String[] args){
+            launch();
+        }
+
 }

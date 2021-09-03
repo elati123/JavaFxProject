@@ -1,18 +1,28 @@
 package com.example.demo;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    public static Controller single_instance = null;
+
+    @FXML
+    public AnchorPane pane;
 
     @FXML
     public TableView<Track> table;
@@ -37,6 +47,16 @@ public class Controller implements Initializable {
 
     );
 
+    public Controller(){
+
+    }
+    public static Controller getInstance(){
+        if (single_instance == null)
+            single_instance = new Controller();
+
+        return single_instance;
+
+    }
 
 
     @Override
@@ -48,9 +68,54 @@ public class Controller implements Initializable {
 
         table.setItems(list);
         table.getItems().add(new Track(32,32,32,"abc"));
+        System.out.println(table.getItems());
+        System.out.println(
+                "çalışıyor"
+        );
+
+        addData();
+
+
+
 
 
     }
+    public void addData() {
 
+        Thread task = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                double progress = 0;
+                for(int i = 0;i<10;i++){
+
+                    try{
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            table.getItems().add(new Track(32,11,43,"wer"));
+                        }
+                    });
+                }
+
+            }
+        });
+
+        task.start();
+
+    }
+
+
+
+    public void close(ActionEvent event){
+
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.close();
+
+    }
 
 }
