@@ -73,7 +73,7 @@ public class Controller implements Initializable {
                 "çalışıyor"
         );
 
-        addData();
+
     }
     public void addData() {
 
@@ -113,5 +113,12 @@ public class Controller implements Initializable {
 
 
     }
+    public void listen(){
+
+    }
+
+
+
+
 
 }
