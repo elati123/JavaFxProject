@@ -110,6 +110,7 @@ public class Controller implements Initializable {
 
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
+        task
 
     }
 

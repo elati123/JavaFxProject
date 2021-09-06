@@ -18,6 +18,7 @@ public class Main extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
@@ -25,6 +26,8 @@ public class Main extends Application {
 
         public static void main (String[] args){
             launch();
+            Controller cnx  = new Controller();
+
         }
 
 }

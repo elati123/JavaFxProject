@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="1027.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="1027.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
    <children>
-      <TableView fx:id="table" layoutX="145.0" layoutY="124.0" prefHeight="479.0" prefWidth="737.0">
+      <TableView fx:id="table" layoutX="145.0" layoutY="124.0" prefHeight="479.0" prefWidth="737.0" stylesheets="@style.css">
         <columns>
           <TableColumn fx:id="lat" prefWidth="75.0" text="Latitude" />
           <TableColumn fx:id="lon" prefWidth="209.0" text="Longitude" />
