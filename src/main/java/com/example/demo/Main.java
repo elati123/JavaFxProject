@@ -10,6 +10,8 @@ import javafx.util.Callback;
 
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Main extends Application {
     @Override
@@ -26,7 +28,7 @@ public class Main extends Application {
 
         public static void main (String[] args){
             launch();
-            Controller cnx  = new Controller();
+
 
         }
 

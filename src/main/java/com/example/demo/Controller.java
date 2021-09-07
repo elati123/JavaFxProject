@@ -21,6 +21,8 @@ public class Controller implements Initializable {
 
     public static Controller single_instance = null;
 
+    public int flag= 0;
+
     @FXML
     public AnchorPane pane;
 
@@ -72,6 +74,16 @@ public class Controller implements Initializable {
         System.out.println(
                 "çalışıyor"
         );
+        int port = 50001;
+        DataSender server = new DataSender(port);
+        Thread serverT = new Thread(server);
+        DemoReceiver client = new DemoReceiver(port);
+        Thread clientT = new Thread(client);
+        clientT.start();
+        serverT.start();
+
+
+
 
 
     }
@@ -93,6 +105,8 @@ public class Controller implements Initializable {
                         @Override
                         public void run() {
                             table.getItems().add(new Track(32,11,43,"wer"));
+
+
                         }
                     });
                 }
@@ -110,6 +124,8 @@ public class Controller implements Initializable {
 
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
+        // Terminate all threads
+        flag = 1;
 
 
     }
