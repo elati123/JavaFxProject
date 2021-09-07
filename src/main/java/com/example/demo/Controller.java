@@ -14,6 +14,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,7 +56,7 @@ public class Controller implements Initializable {
     );
 
     public Controller(){
-
+        list.add(new Track(0,0,0,"initial"));
     }
     public static Controller getInstance(){
         if (single_instance == null)
@@ -77,9 +83,10 @@ public class Controller implements Initializable {
         int port = 50001;
         DataSender server = new DataSender(port);
         Thread serverT = new Thread(server);
-        DemoReceiver client = new DemoReceiver(port);
-        Thread clientT = new Thread(client);
-        clientT.start();
+
+        //couldnt use a seperate client class since i cant make singleton controller objets
+        listen(port);
+
         serverT.start();
 
 
@@ -87,7 +94,8 @@ public class Controller implements Initializable {
 
 
     }
-    public void addData() {
+    //Deno function for table functionality
+    public  void addData(int lon,int lat, int alt , String status) {
 
         Thread task = new Thread(new Runnable() {
             @Override
@@ -104,7 +112,7 @@ public class Controller implements Initializable {
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
-                            table.getItems().add(new Track(32,11,43,"wer"));
+                            table.getItems().add(new Track(lon,lat,alt,status));
 
 
                         }
@@ -129,7 +137,44 @@ public class Controller implements Initializable {
 
 
     }
-    public void listen(){
+    // Function that adds data it listens
+    public void listen(int port){
+
+        Thread listen = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.printf("client working");
+                try(DatagramSocket clientSocket = new DatagramSocket(port)){
+                    byte[] buffer = new byte[65507];
+                    while(true){
+                        DatagramPacket datagramPacket = new DatagramPacket(buffer,0,buffer.length);
+                        clientSocket.receive(datagramPacket);
+                        ByteArrayInputStream baos = new ByteArrayInputStream(datagramPacket.getData());
+                        ObjectInputStream oos = new ObjectInputStream(baos);
+
+                        Message receivedMessage = (Message)  oos.readObject();
+
+                        System.out.print(receivedMessage.status);
+                        int lon = receivedMessage.lon;
+                        int lat = receivedMessage.lat;
+                        int alt = receivedMessage.alt;
+                        String status = receivedMessage.status;
+                        table.getItems().add(new Track(lon,lat,alt,status));
+
+                    }
+
+
+                } catch (SocketException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                
+            }
+        });
+        listen.start();
 
     }
 

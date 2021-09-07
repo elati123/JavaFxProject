@@ -16,6 +16,8 @@ public class DemoReceiver implements  Runnable{
     }
 
 
+
+
     @Override
     public void run() {
         System.out.printf("client working");
@@ -30,6 +32,11 @@ public class DemoReceiver implements  Runnable{
                 Message receivedMessage = (Message)  oos.readObject();
 
                 System.out.print(receivedMessage.status);
+                int lon = receivedMessage.lon;
+                int lat = receivedMessage.lat;
+                int alt = receivedMessage.alt;
+                String status = receivedMessage.status;
+
 
             }
 
