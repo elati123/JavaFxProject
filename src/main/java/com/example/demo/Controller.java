@@ -186,7 +186,7 @@ public class Controller implements Initializable {
 
 
     public void loadPage(){
-        engine.load(getClass().getResource("map.html").toExternalForm());
+        engine.load(getClass().getResource("map/map.html").toExternalForm());
 
     }
 
@@ -233,16 +233,18 @@ public class Controller implements Initializable {
 
                         ButtonMessage receivedMessage = (ButtonMessage) oos.readObject();
 
-                        int lon = receivedMessage.lon;
-                        int lat = receivedMessage.lat;
+                        int x = receivedMessage.lon;
+                        int y = receivedMessage.lat;
 
-                        System.out.println(lon);
+                        System.out.println(x);
 
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
 
-                                engine.executeScript("getLoc()");
+                                System.out.println("initMap(" +x+ ","+y+")");
+                                engine.executeScript("set("+y+","+x+")");
+                                engine.executeScript("initMap()");
                             }
                         });
 
