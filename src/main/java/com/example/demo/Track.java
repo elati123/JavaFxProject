@@ -1,12 +1,8 @@
 package com.example.demo;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,9 +43,7 @@ public class Track  {
             @Override
             public void handle(ActionEvent event) {
 
-                SingletonDataSender cnx = SingletonDataSender.getInstance();
-                cnx.setLat(getLat());
-                cnx.setLon(getLon());
+
 
                 try(DatagramSocket serverSocket = new DatagramSocket(50005)) {
                     System.out.println("BUTTON BASILDI");

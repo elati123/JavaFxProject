@@ -22,8 +22,7 @@ public class DataSender implements Runnable {
     public void run() {
         Random random = new Random();
 
-        System.out.printf("server running");
-
+        System.out.println("Server Working");
 
         try(DatagramSocket serverSocket = new DatagramSocket(50000)) {
             while (true){

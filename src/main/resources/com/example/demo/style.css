@@ -1,5 +1,5 @@
 .root{
-    -fx-background-image: url("background.jpg");
+    -fx-background-image: url("bg.jpg");
 }
 
 .table-view{
@@ -35,5 +35,12 @@
 .table-view .table-column{
     -fx-text-alignment: center;
     -fx-alignment: CENTER
+
+}
+
+.web-view{
+    -fx-border-color: black;
+    -fx-border-radius: 1px;
+
 
 }

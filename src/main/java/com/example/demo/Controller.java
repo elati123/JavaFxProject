@@ -101,36 +101,6 @@ public class Controller implements Initializable {
 
     }
     //Deno function for table functionality
-    public  void addData(int lon,int lat, int alt , String status) {
-
-        Thread task = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                double progress = 0;
-               while (true){
-
-                    try{
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            table.getItems().add(new Track(lon,lat,alt,status));
-
-
-                        }
-                    });
-                }
-
-            }
-        });
-
-        task.start();
-
-    }
 
 
 
@@ -139,6 +109,8 @@ public class Controller implements Initializable {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.close();
         // Terminate all threads
+        System.exit(0);
+
 
 
 
@@ -149,7 +121,7 @@ public class Controller implements Initializable {
         Thread listen = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.printf("client working");
+                System.out.println("client working");
                 try(DatagramSocket clientSocket = new DatagramSocket(port)){
                     byte[] buffer = new byte[65507];
                     while(true){
@@ -181,6 +153,7 @@ public class Controller implements Initializable {
         });
         listen.start();
 
+
     }
 
 
@@ -190,29 +163,6 @@ public class Controller implements Initializable {
 
     }
 
-    public void testSingleton(){
-
-        SingletonDataSender cnx1 = SingletonDataSender.getInstance();
-
-
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true) {
-                    if (SingletonDataSender.flag == 1) {
-                        System.out.println("flag satus:"+SingletonDataSender.flag);
-                        SingletonDataSender.flag = 0;
-                    }
-                }
-
-            }
-        });
-        thread.start();
-
-
-
-    }
 
     public void receiveButtonData(){
 
