@@ -26,8 +26,8 @@ public class DataSender implements Runnable {
 
         try(DatagramSocket serverSocket = new DatagramSocket(50000)) {
             while (true){
-                int lat =random.nextInt(100);
-                int lon =random.nextInt(100);
+                int lat =random.nextInt(90+89) - 90;
+                int lon =random.nextInt(180 +179) -180;
                 int alt =random.nextInt(1000);
                 int statusCode = random.nextInt(2);
                 String status;

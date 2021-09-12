@@ -14,6 +14,9 @@
 
 <script>
 
+    let locationsLat = [];
+    let locationsLon = [];
+
 
     var lt;
     var lon;
@@ -37,7 +40,29 @@
         });
     }
 
+    function initMap2(){
 
+        const uluru1 = { lat: locationsLat[1], lng: locationsLon[1] };
+
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 2,
+            center: uluru1 ,
+        });
+
+
+
+        var marker,i;
+        for (i= 0 ; i< locationsLat.length;i++){
+           const marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locationsLat[i],locationsLon[i]),
+                map: map,
+            });
+
+        }
+
+
+
+    }
 
 
 </script>

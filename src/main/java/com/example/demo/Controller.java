@@ -28,6 +28,8 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
 
+    @FXML
+    public Button showAllButton;
 
     @FXML
     public AnchorPane pane;
@@ -110,9 +112,6 @@ public class Controller implements Initializable {
         stage.close();
         // Terminate all threads
         System.exit(0);
-
-
-
 
     }
     // Function that adds data it listens
@@ -213,6 +212,31 @@ public class Controller implements Initializable {
         });
     listen.start();
     }
+
+    public void ShowAll(ActionEvent event){
+
+       ObservableList<Track> a=table.getItems();
+       a.forEach(track ->{
+
+               //System.out.println(track.getLat());
+
+          engine.executeScript(" locationsLat.push("+track.getLat()+")" );
+          engine.executeScript(" locationsLon.push("+track.getLon()+")");
+
+
+
+
+       });
+
+
+       engine.executeScript("initMap2()");
+
+        engine.executeScript("locationsLat= []");
+        engine.executeScript("locationsLon= []");
+
+    }
+
+
 
 
 
